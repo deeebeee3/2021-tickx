@@ -4,13 +4,13 @@ import { Grid, Segment, Checkbox, Form, Button } from "semantic-ui-react";
 
 import List from "./List";
 
-function SearchBar() {
+const SearchBar = () => {
   const [results, setResults] = useState({});
 
   const [media, setMedia] = useState({
     image: true,
-    audio: true,
-    video: true,
+    audio: false,
+    video: false,
   });
 
   const [searchValue, setSearchValue] = useState("");
@@ -55,7 +55,6 @@ function SearchBar() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(searchValue);
     getData();
   };
 
@@ -101,6 +100,6 @@ function SearchBar() {
       </Grid.Column>
     </Grid>
   );
-}
+};
 
 export default SearchBar;
