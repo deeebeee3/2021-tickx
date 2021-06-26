@@ -1,8 +1,15 @@
-import axios from "axios";
 import React, { useState } from "react";
-import { Grid, Segment, Checkbox, Form, Button } from "semantic-ui-react";
-
+import {
+  Grid,
+  Segment,
+  Checkbox,
+  Form,
+  Button,
+  Header,
+} from "semantic-ui-react";
 import List from "./List";
+
+import { api } from "../api";
 
 const SearchBar = () => {
   const [results, setResults] = useState({});
@@ -15,8 +22,6 @@ const SearchBar = () => {
 
   const [searchValue, setSearchValue] = useState("");
 
-  const apiUrl = "https://images-api.nasa.gov";
-
   const getData = async () => {
     try {
       const mediaArr = [];
@@ -28,8 +33,8 @@ const SearchBar = () => {
         }
       });
 
-      const response = await axios.get(
-        `${apiUrl}/search?&media_type=${mediaArr.toString()}&q=${searchValue}`
+      const response = await api.get(
+        `/search?&media_type=${mediaArr.toString()}&q=${searchValue}`
       );
 
       setResults(response.data.collection.items);
@@ -61,6 +66,9 @@ const SearchBar = () => {
   return (
     <Grid>
       <Grid.Column width={16}>
+        <Header as="h3" style={{ marginTop: "20px" }}>
+          NASA API SEARCH
+        </Header>
         <Segment>
           <Form>
             <Form.Field onChange={handleSearchChange}>
